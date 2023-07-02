@@ -48,7 +48,7 @@ export function styled(tag, options = {}) {
   const { class: initClass, name, variants = {}, defaults = {} } = options;
 
   const StyledComponent = forwardRef(
-    ({ as: asProp, className, ...rest }, ref) => {
+    ({ as: asProp, className, css, ...rest }, ref) => {
       const FinalComponent = asProp ?? tag;
       const { classNames: variantClasses, deletableKeys } = getVariantClasses(
         rest,
@@ -58,7 +58,7 @@ export function styled(tag, options = {}) {
       deletableKeys.forEach((key) => {
         delete rest[key];
       });
-      const finalClass = cx(initClass, ...variantClasses, className);
+      const finalClass = cx(initClass, ...variantClasses, className, css);
       return <FinalComponent {...rest} className={finalClass} ref={ref} />;
     }
   );

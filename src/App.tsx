@@ -1,40 +1,33 @@
-import { useState } from "react";
-import { styled, keyframes } from "@stitches/react";
-import { icx } from "./runtime";
+import * as React from "react";
+// @ts-ignore
+import { icss, styled, keyframes, css } from "no-stitches/runtime";
+
+const cls = css({
+  color: "red",
+});
 
 const scaleUp = keyframes({
   "0%": { transform: "scale(1)" },
   "100%": { transform: "scale(1.5)" },
 });
 
-const Button = styled("button", {
+const Button = styled("button", ({ theme, dark }: any) => ({
   borderRadius: "9999px",
   fontSize: "13px",
   padding: "10px 15px",
   "&:hover": {
-    color: "white",
+    color: "$foreground",
     animation: `${scaleUp} 200ms`,
   },
   "@bp1": {
-    backgroundColor: "green",
+    backgroundColor: theme.colors.background.computedValue,
+    color: dark.colors.background.computedValue,
   },
-  // "&::before": {
-  //   content: `''`,
-  //   display: "block",
-  //   backgroundImage: "linear-gradient(to right, #1fa2ff, #12d8fa, #a6ffcb)",
-  //   position: "absolute",
-  //   top: "-3px",
-  //   left: "-3px",
-  //   width: "calc(100% + 6px)",
-  //   height: "calc(100% + 6px)",
-  //   borderRadius: "inherit",
-  //   zIndex: -1,
-  // },
-  // [`& ${Icon}`]: {
-  //   marginLeft: "5px",
-  // },
-  // [`& ${class1().selector}`]: {
-  //   marginRight: "5px",
+  [`& .${cls}`]: {
+    color: "blue",
+  },
+  // [`.${theme}`]: {
+  //   marginLeft: 5,
   // },
   variants: {
     variant: {
@@ -56,6 +49,7 @@ const Button = styled("button", {
         "&:hover": {
           padding: 2.5,
         },
+        "@bp2": {},
       },
       medium: {
         padding: 10,
@@ -69,7 +63,7 @@ const Button = styled("button", {
     // variant: "primary",
     // size: "medium",
   },
-});
+}));
 
 const AnotherButton = styled(Button, {
   color: "red",
@@ -80,8 +74,10 @@ const AnotherButton = styled(Button, {
   },
 });
 
+const LazyH1 = React.lazy(() => import("./LazyH1"));
+
 export default function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = React.useState(0);
   const size = count % 3 === 0 ? "small" : count % 3 === 1 ? "medium" : "large";
   return (
     <>
@@ -89,17 +85,25 @@ export default function App() {
         variant={count % 2 === 0 ? "secondary" : "primary"}
         type="button"
         size={size}
-        css={icx({
-          color: "white",
-        })}
+        css={
+          count % 2 === 0
+            ? icss({
+                color: "white",
+              })
+            : icss({
+                color: "magenta",
+              })
+        }
         onClick={() => setCount((c) => c + 1)}
       >
         Count {count}
+        <span className={cls()}>Color blue</span>
         {/* <Icon>Icon</Icon> */}
       </Button>
       <AnotherButton size="large" type="button">
         Count
       </AnotherButton>
+      {count >= 5 && <LazyH1>Hello H1</LazyH1>}
     </>
   );
 }

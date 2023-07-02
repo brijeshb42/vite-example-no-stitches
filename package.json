@@ -3,20 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "vite build"
   },
   "dependencies": {
-    "@linaria/babel-preset": "^4.4.5",
-    "@linaria/vite": "^4.2.11",
-    "@mui/no-stitches": "file:../mui/material-ui/packages/mui-no-stitches/build",
-    "@stitches/react": "^1.2.8",
+    "no-stitches": "^0.0.1-alpha.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.5",
-    "@babel/core": "^7.22.5",
-    "@babel/plugin-syntax-jsx": "^7.22.5",
+    "@babel/plugin-transform-typescript": "^7.22.5",
+    "@linaria/vite": "^4.2.11",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^4.0.1",
