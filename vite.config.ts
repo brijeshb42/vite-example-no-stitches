@@ -6,9 +6,9 @@ import noStitchesPlugin from "no-stitches/vite";
 export default defineConfig(({ mode }) => ({
   plugins: [
     noStitchesPlugin({
+      displayName: false,
+      readableVariantClass: false,
       // Add if you are using typescript
-      displayName: true,
-      readableVariantClass: true,
       babelOptions: {
         plugins: ["@babel/plugin-transform-typescript"],
       },

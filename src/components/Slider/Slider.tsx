@@ -34,6 +34,9 @@ const SliderRoot = styled("span", ({ theme }: any) => ({
   cursor: "pointer",
   touchAction: "none",
   WebkitTapHighlightColor: "transparent",
+  "@media print": {
+    printColorAdjust: "exact",
+  },
   [`&.${sliderClasses.disabled}`]: {
     pointerEvents: "none",
     cursor: "default",
