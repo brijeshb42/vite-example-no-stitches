@@ -6,13 +6,20 @@
     "build": "vite build"
   },
   "dependencies": {
-    "no-stitches": "^0.0.1-alpha.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.5",
+    "@mui/material": "^5.13.6",
+    "@mui/utils": "^5.13.7",
+    "clsx": "^1.2.1",
+    "no-stitches": "^0.0.1-alpha.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-typescript": "^7.22.5",
     "@linaria/vite": "^4.2.11",
+    "@mui/system": "^5.13.7",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^4.0.1",
