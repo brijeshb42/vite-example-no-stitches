@@ -20,10 +20,6 @@ const HalfDiv = styled("div", {
   alignItems: "center",
 });
 
-const fullWidthCls = icss({
-  width: "100%",
-});
-
 // const LazySlider = React.lazy(() => import("@mui/material/Slider"));
 // const LazyZeroSlider = React.lazy(() =>
 //   import("./components/Slider/Slider").then(({ Slider }) => ({
@@ -75,7 +71,18 @@ export default function App() {
       </div>
       <PaddedDiv>
         {(showUI === "both" || showUI === "material") && (
-          <HalfDiv css={showUI === "material" ? fullWidthCls : undefined}>
+          <HalfDiv
+            css={
+              showUI === "material"
+                ? icss(
+                    {
+                      width: "100%",
+                    },
+                    HalfDiv
+                  )
+                : undefined
+            }
+          >
             <h2>Material</h2>
             <Slider
               aria-label="Small steps"
@@ -90,7 +97,15 @@ export default function App() {
           </HalfDiv>
         )}
         {(showUI === "both" || showUI === "no-stitches") && (
-          <HalfDiv css={showUI === "no-stitches" ? fullWidthCls : undefined}>
+          <HalfDiv
+            css={
+              showUI === "no-stitches"
+                ? icss({
+                    width: "100%",
+                  })
+                : undefined
+            }
+          >
             <h2>no-stitches</h2>
             <ZeroSlider
               aria-label="Small steps"

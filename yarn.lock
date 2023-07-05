@@ -1935,10 +1935,10 @@ nanoid@^3.3.6:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
   integrity sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==
 
-no-stitches@^0.0.1-alpha.3:
-  version "0.0.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/no-stitches/-/no-stitches-0.0.1-alpha.3.tgz#c1395b9047ea9388e4db14bc947b33aea4d8026a"
-  integrity sha512-C0PhCUfElP8RmiFB65JHys6DOccj2RsnUpyvuargFKGoE2g3uvzut5LrwvbTgnRjap0qSIpiogqJhdl2uIVWRA==
+no-stitches@^0.0.1-alpha.4:
+  version "0.0.1-alpha.4"
+  resolved "https://registry.yarnpkg.com/no-stitches/-/no-stitches-0.0.1-alpha.4.tgz#240d2956050c0ad4064ce254f20162568b7a5965"
+  integrity sha512-QRQahOw5SG3vtdppJvDIm7Bwob0bijWf9zCeMoXlwNstP5D0sMEXL+KHPgDUPDi/lroOg2KtKoJT4OI9S+loZQ==
   dependencies:
     "@babel/types" "^7.22.5"
     "@linaria/babel-preset" "^4.4.5"
