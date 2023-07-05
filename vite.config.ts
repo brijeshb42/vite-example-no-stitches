@@ -6,8 +6,8 @@ import noStitchesPlugin from "no-stitches/vite";
 export default defineConfig(({ mode }) => ({
   plugins: [
     noStitchesPlugin({
-      displayName: false,
-      readableVariantClass: false,
+      displayName: true,
+      readableVariantClass: true,
       // Add if you are using typescript
       babelOptions: {
         plugins: ["@babel/plugin-transform-typescript"],
@@ -87,7 +87,11 @@ export default defineConfig(({ mode }) => ({
     mode === "production" ? splitVendorChunkPlugin() : false,
   ],
   build: {
-    minify: false,
+    minify: true,
     sourcemap: true,
+    // terserOptions: {
+    //   mangle: false,
+    //   sourceMap: true,
+    // },
   },
 }));

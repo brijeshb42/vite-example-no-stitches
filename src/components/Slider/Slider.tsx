@@ -400,7 +400,7 @@ const SliderMarkLabel = styled("span", {
   },
 });
 
-const useUtilityClasses = (ownerState: SliderOwnerState) => {
+function useUtilityClasses(ownerState: SliderOwnerState) {
   const {
     disabled,
     dragging,
@@ -443,7 +443,8 @@ const useUtilityClasses = (ownerState: SliderOwnerState) => {
   };
 
   return composeClasses(slots, getSliderUtilityClass, classes);
-};
+}
+
 const Forward = ({ children }: { children?: React.ElementType }) => children;
 
 export const Slider = React.forwardRef<any, SliderProps>(function Slider(

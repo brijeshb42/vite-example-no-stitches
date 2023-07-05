@@ -2,7 +2,7 @@ import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { Slider as ZeroSlider } from "./components/Slider/Slider";
 // @ts-ignore
-import { styled } from "no-stitches/runtime";
+import { styled, icss } from "no-stitches/runtime";
 
 const PaddedDiv = styled("div", {
   display: "flex",
@@ -20,13 +20,38 @@ const HalfDiv = styled("div", {
   alignItems: "center",
 });
 
+const fullWidthCls = icss({
+  width: "100%",
+});
+
+// const LazySlider = React.lazy(() => import("@mui/material/Slider"));
+// const LazyZeroSlider = React.lazy(() =>
+//   import("./components/Slider/Slider").then(({ Slider }) => ({
+//     default: Slider,
+//   }))
+// );
+
 export default function App() {
+  const showUI = React.useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("show") ?? "both";
+  }, []);
   const [isColorPrimary, setIsColorPrimary] = React.useState(true);
   const [showMarks, setShowMarks] = React.useState(true);
 
   return (
     <>
       <div>
+        <div
+          className={icss({
+            display: "flex",
+            gap: 20,
+          })}
+        >
+          <a href="/?show=both">Render Both</a>
+          <a href="/?show=material">Render only material</a>
+          <a href="/?show=no-stitches">Render only no-stitches</a>
+        </div>
         <div>
           <label>
             <input
@@ -49,32 +74,36 @@ export default function App() {
         </div>
       </div>
       <PaddedDiv>
-        <HalfDiv>
-          <h2>Material</h2>
-          <Slider
-            aria-label="Small steps"
-            defaultValue={0.00000005}
-            step={0.00000001}
-            marks={showMarks}
-            min={-0.00000005}
-            max={0.0000001}
-            valueLabelDisplay="auto"
-            color={isColorPrimary ? "primary" : "secondary"}
-          />
-        </HalfDiv>
-        <HalfDiv>
-          <h2>no-stitches</h2>
-          <ZeroSlider
-            aria-label="Small steps"
-            defaultValue={0.00000005}
-            step={0.00000001}
-            marks={showMarks}
-            min={-0.00000005}
-            max={0.0000001}
-            valueLabelDisplay="auto"
-            color={isColorPrimary ? "primary" : "secondary"}
-          />
-        </HalfDiv>
+        {(showUI === "both" || showUI === "material") && (
+          <HalfDiv css={showUI === "material" ? fullWidthCls : undefined}>
+            <h2>Material</h2>
+            <Slider
+              aria-label="Small steps"
+              defaultValue={50}
+              step={2}
+              marks={showMarks}
+              min={0}
+              max={100}
+              valueLabelDisplay="auto"
+              color={isColorPrimary ? "primary" : "secondary"}
+            />
+          </HalfDiv>
+        )}
+        {(showUI === "both" || showUI === "no-stitches") && (
+          <HalfDiv css={showUI === "no-stitches" ? fullWidthCls : undefined}>
+            <h2>no-stitches</h2>
+            <ZeroSlider
+              aria-label="Small steps"
+              defaultValue={50}
+              step={2}
+              marks={showMarks}
+              min={0}
+              max={100}
+              valueLabelDisplay="auto"
+              color={isColorPrimary ? "primary" : "secondary"}
+            />
+          </HalfDiv>
+        )}
       </PaddedDiv>
     </>
   );
