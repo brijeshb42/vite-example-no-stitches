@@ -1,7 +1,6 @@
 import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { Slider as ZeroSlider } from "./components/Slider/Slider";
-// @ts-ignore
 import { styled, icss } from "no-stitches/runtime";
 
 const PaddedDiv = styled("div", {
@@ -28,12 +27,16 @@ const HalfDiv = styled("div", {
 // );
 
 export default function App() {
+  const [value, setValue] = React.useState(50);
   const showUI = React.useMemo(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get("show") ?? "both";
   }, []);
   const [isColorPrimary, setIsColorPrimary] = React.useState(true);
+  const [size, setSize] = React.useState("medium");
   const [showMarks, setShowMarks] = React.useState(true);
+  const [isTrackInverted, setIsTrackInverted] = React.useState(false);
+  const [disabled, setDisabled] = React.useState(false);
 
   return (
     <>
@@ -62,10 +65,39 @@ export default function App() {
           <label>
             <input
               type="checkbox"
+              checked={isTrackInverted}
+              onChange={() => setIsTrackInverted(!isTrackInverted)}
+            />
+            Track type: {isTrackInverted ? "Inverted" : "Normal"}
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={disabled}
+              onChange={() => setDisabled(!disabled)}
+            />
+            Disabled: {disabled ? "Yes" : "No"}
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
               checked={showMarks}
               onChange={() => setShowMarks(!showMarks)}
             />
             Show marks: {showMarks ? "Yes" : "No"}
+          </label>
+        </div>
+        <div>
+          <label>
+            Change Size:
+            <select value={size} onChange={(ev) => setSize(ev.target.value)}>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+            </select>
           </label>
         </div>
       </div>
@@ -92,7 +124,12 @@ export default function App() {
               min={0}
               max={100}
               valueLabelDisplay="auto"
+              size={size as "small" | "medium"}
               color={isColorPrimary ? "primary" : "secondary"}
+              track={isTrackInverted ? "inverted" : "normal"}
+              disabled={disabled}
+              value={value}
+              onChange={(ev, val) => setValue(val as number)}
             />
           </HalfDiv>
         )}
@@ -115,7 +152,12 @@ export default function App() {
               min={0}
               max={100}
               valueLabelDisplay="auto"
+              size={size as "small" | "medium"}
               color={isColorPrimary ? "primary" : "secondary"}
+              track={isTrackInverted ? "inverted" : "normal"}
+              disabled={disabled}
+              value={value}
+              onChange={(ev, val) => setValue(val as number)}
             />
           </HalfDiv>
         )}

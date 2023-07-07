@@ -1,12 +1,13 @@
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import react from "@vitejs/plugin-react";
 import noStitchesPlugin from "no-stitches/vite";
+// import { createTheme } from "@mui/material/styles";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
     noStitchesPlugin({
-      displayName: true,
+      displayName: false,
       readableVariantClass: true,
       // Add if you are using typescript
       babelOptions: {
@@ -73,6 +74,9 @@ export default defineConfig(({ mode }) => ({
           },
         ],
       },
+      // muiThemes: {
+      //   material: createTheme(),
+      // },
       tagResolver(source, tag) {
         if (
           source.startsWith("no-stitches") ||

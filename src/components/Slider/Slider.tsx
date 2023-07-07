@@ -1,12 +1,11 @@
 import * as React from "react";
 import type { SliderOwnerState, SliderProps } from "@mui/material/Slider";
-import { alpha } from "@mui/system/colorManipulator";
 import useSlider, { valueToPercent } from "@mui/base/useSlider";
 import composeClasses from "@mui/base/composeClasses";
 import { isHostComponent, useSlotProps } from "@mui/base/utils";
 import SliderValueLabel from "@mui/material/Slider/SliderValueLabel";
-// @ts-ignore
 import { styled } from "no-stitches/runtime";
+import clsx from "clsx";
 
 import sliderClasses, { getSliderUtilityClass } from "./sliderClasses";
 import {
@@ -16,7 +15,7 @@ import {
   pxToRem,
   shouldSpreadAdditionalProps,
 } from "../utils/themeUtils";
-import clsx from "clsx";
+import { alpha, lighten, darken } from "../utils/colorManipulator";
 
 function Identity<T = unknown>(x: T) {
   return x;
@@ -77,11 +76,51 @@ const SliderRoot = styled("span", ({ theme }: any) => ({
         },
       },
     },
+    size: {
+      small: {},
+      medium: {},
+    },
+    marked: {
+      yes: {},
+      no: {},
+    },
   },
   defaultVariants: {
     color: "primary",
     orientation: "horizontal",
+    size: "medium",
+    marked: "no",
   },
+  compoundVariants: [
+    {
+      orientation: "horizontal",
+      size: "small",
+      css: {
+        height: 2,
+      },
+    },
+    {
+      orientation: "horizontal",
+      marked: "yes",
+      css: {
+        marginBottom: 20,
+      },
+    },
+    {
+      orientation: "vertical",
+      size: "small",
+      css: {
+        width: 2,
+      },
+    },
+    {
+      orientation: "horizontal",
+      marked: "yes",
+      css: {
+        marginRight: 44,
+      },
+    },
+  ],
 }));
 
 const SliderRail = styled("span", {
@@ -137,11 +176,11 @@ const SliderTrack = styled("span", ({ theme }: any) => ({
     color: {
       primary: {
         // $$trackColor: lighten(theme.colors.primaryMain.value, 0.62),
-        $$trackColor: theme.colors.primaryMain.value,
+        $$trackColor: lighten(theme.colors.primaryMain.value, 0.62),
       },
       secondary: {
         // $$trackColor: lighten(theme.colors.secondaryMain.value, 0.62),
-        $$trackColor: theme.colors.secondaryMain.value,
+        $$trackColor: lighten(theme.colors.secondaryMain.value, 0.62),
       },
     },
     orientation: {
@@ -644,6 +683,8 @@ export const Slider = React.forwardRef<any, SliderProps>(function Slider(
     <RootSlot
       color={rootProps.ownerState?.color}
       orientation={rootProps.ownerState?.orientation}
+      marked={rootProps.ownerState?.marked ? "yes" : "no"}
+      size={rootProps.ownerState?.size}
       {...rootProps}
     >
       <RailSlot
@@ -745,6 +786,7 @@ export const Slider = React.forwardRef<any, SliderProps>(function Slider(
                 [classes.active]: active === index,
                 [classes.focusVisible]: focusedThumbIndex === index,
               })}
+              size={thumbProps.ownerState?.size}
               style={{
                 ...style,
                 // ...getThumbStyle(index),
