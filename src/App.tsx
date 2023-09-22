@@ -1,7 +1,22 @@
 import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { Slider as ZeroSlider } from "./components/Slider/Slider";
-import { styled, icss } from "no-stitches/runtime";
+import { styled, icss, keyframes } from "no-stitches/runtime";
+
+const bounce = keyframes(({
+  'from, 20%, 53%, 80%, to': {
+    transform: 'translate3d(0,0,0)',
+  },
+  '40%, 43%': {
+    transform: 'translate3d(0, -30px, 0)',
+  },
+  '70%': {
+    transform: 'translate3d(0, -15px, 0)',
+  },
+  '90%': {
+    transform: 'translate3d(0,-4px,0)',
+  },
+});
 
 const PaddedDiv = styled("div", {
   display: "flex",
@@ -10,6 +25,7 @@ const PaddedDiv = styled("div", {
   maxWidth: 800,
   gap: 40,
   border: "1px solid $primaryMain",
+  animation: ${bounce} 1s ease infinite;
 });
 
 const HalfDiv = styled("div", {
